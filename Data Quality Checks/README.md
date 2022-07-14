@@ -30,11 +30,11 @@ A World Bank-approved software solution is VeraCrypt. Instructions on how to cre
 ### Section 1 -  Preparing Survey Forms 
 
 ### Section 2 -  Uploading Survey Forms 
-* A. Step One: Upload your main form into SurveyCTO
-* B. Step Two: Upload preloaded data into SurveyCTO as a server dataset and attaching to the survey form:
-	i. Uploading preloaded data into SurveyCTO as a server dataset: 
-		a. Under the SurveyCTO console’s Design tab, click “Add server dataset” -> “New dataset for data”. 
-		b. Select the preloaded data from your computer or Google Drive depending on the file location.
-		* More information can be found here.
+1.  Upload your main form into SurveyCT
+2.  Upload preloaded data into SurveyCTO as a server dataset and attaching to the survey form:
 
+    -   Uploading preloaded data into SurveyCTO as a server dataset: 
+        -   Under the SurveyCTO console’s Design tab, click “Add server dataset” -> “New dataset for data”. 
+        -   Select the preloaded data from your computer or Google Drive depending on the file location.
+        -   More information can be found here.
 
