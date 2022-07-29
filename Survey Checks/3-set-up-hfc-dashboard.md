@@ -49,7 +49,7 @@ REMEMBER - Convert all columns in google sheet into text format before exporting
     - Summary statistics tables that describe the distributions of outcome variables
     - (optional) Percentage of times that an answer is changed (by using conditional formatting, we highlight values that surpass a certain threshold - in the template it is 10%)
 
-  5. <b>Data Quality (by Enumerator, recent data only)<b>:  Considering that during later stages of data collection, recent trends might be neglected and unnoticeable due to the large volume of existing data, therefore, it is important to create a separate data quality sheet just for data submitted over the past 7 days. This also allows us to capture if enumerators have rectified any early mistakes that we catch. The most easiest way to do this is
+  5. <b>Data Quality (by Enumerator, recent data only)</b>:  Considering that during later stages of data collection, recent trends might be neglected and unnoticeable due to the large volume of existing data, therefore, it is important to create a separate data quality sheet just for data submitted over the past 7 days. This also allows us to capture if enumerators have rectified any early mistakes that we catch. The most easiest way to do this is
     - Duplicate the Data Quality Full Data sheet
     - Add a filter argument to each PivotTable you’ve created and under “filter by condition”, select “Date is within past week”
       - Note: you need to first export the “SubmissionDate” variable to your Google Sheet dashboard and then convert it to datetime format
