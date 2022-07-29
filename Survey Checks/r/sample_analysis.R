@@ -1,276 +1,228 @@
+#==============================================================================#
+#                                                                              #
+#           HIGH-FREQUENCY CHECKS  -- DATA QUALITY CHECKS & ANALYSIS           #
+#                                                                              #
+#------------------------------------------------------------------------------#
+#                                                                              #
+# The purpose of this script is to produce data quality checks by survey date  #
+# and enumerator, and create aggregated descriptive statistics                 #
+#                                                                              #
+#==============================================================================#
 
-################################################################################
-#                                                                              #                       
-#           HIGH-FREQUENCY CHECKS  -- DATA QUALITY CHECKS & ANALYSIS           #            
-#                                                                              #                         
-################################################################################
+# Folder structure is unclear!
+# SETUP ------------------------------------------------------------------------
 
-### PURPOSE ###
+  # Install all required packages
+  pacman::p_load(
+    data.table, 
+    dplyr, 
+    tidyverse, 
+    magrittr, 
+    lubridate, 
+    scales, 
+    viridis,
+    here,
+    stringr, 
+    knitr,
+    kableExtra
+  )
 
-# The purpose of this script is to produce data quality checks by survey date 
-# and enumerator, and create aggregated descriptive statistics 
+# FUNCTIONS --------------------------------------------------------------------
 
-### -------------------------------------------------------------------------###
-
-### CONTENTS ###
-
-  ## A.) Setup
-  
-  ## B.) Time-series data quality checks by enumerators
-  
-  ## v.) Descriptive statistics
-
-###--------------------------------------------------------------------------###
-
-###  A.) SETUP  ###
-
-  ## Install all required packages. 
-    
-     library(pacman)
+  graph_save <- 
+    function(filename, width = 15, height = 15) {
       
-     p_load(data.table, dplyr, tidyverse, magrittr, lubridate, scales, viridis,
-              stringr, knitr, kableExtra)
-
-  ## Set working directory.
-
-     if(Sys.info()["user"] == "boruis")  {
-      root <- "C:/Users/sunsh/Dropbox/0. boruis_folder/dime/survey_hfc/"
-     }
-
-###--------------------------------------------------------------------------###
-
-###  B.) TIME SERIES DATA QUALITY CHECKS BY ENUMERATORS ###
+      ggsave(
+        here(
+          filename
+        ), 
+        height = height, 
+        width = width,
+        units = "cm"
+      )
+      
+    }
   
-  ## In this section, we take a look at analysis based on quality checks done 
-  ## by enumerators.
-
-  ## Load the dataset.
-     
-     surveys <- 
-       fread(paste0(root, # Reads data from working directory folder
-                    "Demo Survey (without module completion)_WIDE.csv"))
-
-  ## Clean date variables.
-     
-     surveys$date <- 
-       surveys$SubmissionDate %>%  
-       as.Date(format = "%b %d, %Y")
-     
-     surveys$starttime_format <- 
-       surveys$starttime %>%  
-       as.POSIXct(format = "%b %d, %Y %I:%M:%S %p")
-     
-     surveys$endtime_format <- 
-       surveys$endtime %>%  
-       as.POSIXct(format = "%b %d, %Y %I:%M:%S %p")
-     
-     surveys$diff_startend <- 
-       difftime(surveys$endtime_format, 
-                surveys$starttime_format, 
-                units = "mins")
-
-  ## Part 1) Number of surveys per day + per day/per enumerator.
-
-    ## 1.1) Number of surveys per day.
-     
-            surveys %>% # Call upon loaded dataset
-                group_by(date) %>% # Group by date
-                summarise(n = n()) %>%
-                  ggplot(aes(x = date, # Add the plot
-                             y = n)) + 
-                    geom_line(alpha = 0.7) + # Add plot options 
-                    geom_point(size = 2.5) +
-                    geom_hline(yintercept = 0, color = NA) +
-                    theme_bw() +
-                    labs(y = "Number of Submissions", # Axis labels
-                         x = "",  color = "") +
-                    theme(legend.position = "bottom") ; # Legend position
-                      ggsave(paste0(root, # Save plot and export to working dir.
-                                    "nsubmission_day.png"), 
-                             width = 15, # Specify width and height of file 
-                             height = 15, 
-                             units = "cm")
-
-    ## 1.2) Number of surveys per day per enumerator.
-            
-            surveys %>% 
-              group_by(enumerator_name, # Group by enumerator and date
-                       date) %>% 
-              summarise(n = n()) %>%
-                ggplot(aes(x = date, 
-                           y = n, 
-                           color = enumerator_name, 
-                           group = enumerator_name)) +
-                  geom_line(alpha = 0.7) + 
-                  geom_point(size = 2.5) +
-                  geom_hline(yintercept = 0, color = NA) +
-                  theme_bw() +
-                  scale_color_brewer(palette = "Dark2") + 
-                  labs(y = "Number of Submissions", 
-                       x = "", color = "") +
-                  theme(legend.position = "bottom") ;  
-                    ggsave(paste0(root, "nsubmission_day_enum.png"), 
-                          width = 15, 
-                          height = 15, 
-                          units = "cm")
-
-  ## Part 2) Average survey duration per day + per day/per enumerator.
-            
-    ## 2.1) Average survey duration per day.
-            
-            surveys %>% 
-              group_by(date) %>% 
-              summarise(n = mean(diff_startend)) %>%
-                ggplot(aes(x = date, 
-                           y = n)) +
-                  geom_line(alpha = 0.7) + 
-                  geom_point(size = 2.5) +
-                  theme_bw() +
-                  labs(y = "Average Survey Duration (Mins)", 
-                       x = "", color = "") +
-                  theme(legend.position = "bottom") ;  
-                    ggsave(paste0(root, "avgduration_day.png"), 
-                          width = 15, 
-                          height = 15, 
-                          units = "cm")
-
-    ## 2.2) Average survey duration per day per enumerator.
-
-            surveys %>% 
-              group_by(date, 
-                       enumerator_name) %>% 
-              summarise(n = mean(diff_startend)) %>%
-                ggplot(aes(x = date, 
-                           y = n, 
-                           color = enumerator_name, 
-                           group = enumerator_name)) +
-                  geom_line(alpha = 0.7) + 
-                  geom_point(size = 2.5) +
-                  theme_bw() +
-                  scale_color_brewer(palette = "Dark2") + 
-                  labs(y = "Average Survey Duration (Mins)", 
-                       x = "", 
-                       color = "") +
-                  theme(legend.position = "bottom") ;  
-                    ggsave(paste0(root, "avgduration_day_enum.png"), 
-                          width = 15, 
-                          height = 15, 
-                          units = "cm")
-
-
-  ## PART 3) Average response to a question per day + per day/per enumerator.
-
-            
-    ## 3.1) Average response to a question per day.
-            
-            surveys %>% 
-              group_by(date) %>% 
-              summarise(n = mean(matatu_own, 
-                                 na.rm = T)) %>%
-                ggplot(aes(x = date, 
-                           y = n)) +
-                  geom_line(alpha = 0.7) + 
-                  geom_point(size = 2.5) +
-                  theme_bw() +
-                  labs(y = "Number of Matatus Owned (Average)", 
-                       x = "", 
-                       color = "") +
-                  theme(legend.position = "bottom");  
-                    ggsave(paste0(root, "avganswer_day.png"), 
-                           width = 15, 
-                           height = 15, 
-                           units = "cm")
-            
-            
-    ## 3.2) Average response to a question per day per enumerator.
-
-            surveys %>% 
-              group_by(date, enumerator_name) %>% 
-              summarise(n = mean(matatu_own, 
-                                 na.rm = T)) %>%
-                ggplot(aes(x = date, 
-                           y = n, 
-                           color = enumerator_name, 
-                           group = enumerator_name)) +
-                  geom_line(alpha = 0.7) + 
-                  geom_point(size = 2.5) +
-                  theme_bw() +
-                  scale_color_brewer(palette = "Dark2") + 
-                  labs(y = "Number of Matatus Owned (Average)", 
-                       x = "", 
-                       color = "") +
-                  theme(legend.position = "bottom");  
-                    ggsave(paste0(root, "avganswer_day_enum.png"), 
-                           width = 15, 
-                           height = 15, 
-                           units = "cm")
-
-
-  ## PART 4) Share of 'other' per day + per day/per enumerator.
-            
-            
-    ## 4.1) Share of 'other' per day.
-
-            surveys %>% 
-              group_by(date) %>% 
-              summarise(n = mean(matatu_challenge_select_10, 
-                                 na.rm = T)) %>% 
-                ggplot(aes(x = date, y = n)) +
-                  geom_line(alpha = 0.7) + 
-                  geom_point(size = 2.5) +
-                  geom_hline(yintercept = 0, color = NA) +
-                  theme_bw() +
-                  scale_y_continuous(label = percent) +
-                  labs(y = "Share of 'Other Challenges' Selected", 
-                       x = "", color = "") +
-                  theme(legend.position = "bottom");  
-                    ggsave(paste0(root, "avgother_day.png"), 
-                           width = 15, 
-                           height = 15, 
-                           units = "cm")
-
-
-    ## 4.2) Share of 'other' per day per enumerator.
-
-            surveys %>% 
-              group_by(date, 
-                       enumerator_name) %>% 
-              summarise(n = mean(matatu_challenge_select_10, 
-                                 na.rm = T)) %>%
-                ggplot(aes(x = date, y = n, 
-                           color = enumerator_name, 
-                           group = enumerator_name)) +
-                  geom_line(alpha = 0.7) + 
-                  geom_point(size = 2.5) +
-                  geom_hline(yintercept = 0, 
-                             color = NA) +
-                  theme_bw() +
-                  scale_color_brewer(palette = "Dark2") + 
-                  scale_y_continuous(label = percent) +
-                  labs(y = "Share of 'Other Challenges' Selected", 
-                       x = "", 
-                       color = "") +
-                  theme(legend.position = "bottom");  
-                    ggsave(paste0(root, "avgother_day_enum.png"), 
-                           width = 15, 
-                           height = 15, 
-                           units = "cm")
-
-###--------------------------------------------------------------------------###
-            
-###  C.) DESCRIPTIVE STATISTICS ###
+  graph_by_date <-
+    function(var, label) {
+      
+      surveys_by_date %>%
+        ggplot(
+          aes(
+            x = date, 
+            y = get(var)
+          )
+        ) +
+        geom_line(alpha = 0.7) + 
+        geom_point(size = 2.5) +
+        theme_bw() +
+        labs(
+          y = label, 
+          x = NULL, 
+          color = NULL
+        ) +
+        theme(legend.position = "bottom")
+    }
   
-  ## In this section, we create some descriptive tables and graphs based on 
-  ## variables included in the data quality checks.
+  graph_by_enum_date <-
+    function(var, label) {
+      
+    surveys_by_enum_date %>%
+      ggplot(
+        aes(
+          x = date, 
+          y = get(var), 
+          color = enumerator_name, 
+          group = enumerator_name
+        )
+      ) +
+      geom_line(alpha = 0.7) + 
+      geom_point(size = 2.5) +
+      geom_hline(
+        yintercept = 0, 
+        color = NA
+      ) +
+      theme_bw() +
+      scale_color_brewer(palette = "Dark2") + 
+      labs(
+        y = label, 
+        x = NULL, 
+        color = NULL
+      ) +
+      theme(legend.position = "bottom")
+  }
 
-  ## Load the dataset.
+# TIME SERIES DATA QUALITY CHECKS BY ENUMERATORS -------------------------------
 
-    surveys <- 
-      fread(paste0(root, 
-                   "Demo Survey (without module completion)_WIDE.csv"))
+ # Load the dataset
+ surveys <- 
+   fread(
+     here(
+       "Demo Survey (without module completion)_WIDE.csv"
+     )
+   )
 
-    surveys %<>% filter(survey_result_update == 1)
+ # Clean date variables
+ surveys <-
+   surveys %>%
+   mutate(
+     SubmissionDate = as_date(
+       SubmissionDate, 
+       format = "%b %d, %Y"
+     ), 
+     across(
+       c(starttime, endtime),
+       ~ as_datetime(., format = "%b %d, %Y %I:%M:%S %p")
+     ),
+     duration = difftime(
+       endtime_format, 
+       starttime_format, 
+       units = "mins"
+     )
+   )
+     
+     
+## Number of surveys per day + per day/per enumerator --------------------------
 
+ surveys_by_date <-
+   surveys %>% 
+   group_by(date) %>%
+   summarise(
+     n_surveys = n(),
+     av_duration = mean(duration),
+     av_matatus = mean(matatu_own, na.rm = T),
+     share_other = mean(matatu_challenge_select_10, na.rm = T)
+   )
+ 
+ surveys_by_enum_date <-
+   surveys %>%
+   group_by(
+     enumerator_name,
+     date
+   ) %>%
+   summarise(
+     n_surveys = n(),
+     av_duration = mean(duration),
+     av_matatus = mean(matatu_own, na.rm = T),
+     share_other = mean(matatu_challenge_select_10, na.rm = T)
+  )
+   
+### Number of surveys per day --------------------------------------------------
+     
+ graph_by_date(
+   "n_surveys",
+   "Number of Submissions"
+ )
+ 
+ graph_save("nsubmission_day.png")
+  
+ ### Number of surveys per day per enumerator ----------------------------------
+  
+ graph_by_enum_date(
+   "n_surveys",
+   "Number of Submissions"
+ )
+ 
+ graph_save("nsubmission_day_enum.png")
+ 
+ ### Average survey duration per day --------------------------------------
+  
+ graph_by_date(
+   "av_duration",
+   "Average Survey Duration (Mins)"
+ )
+ 
+ graph_save("avgduration_day.png")
+  
+### Average survey duration per day per enumerator -----------------------------
+  
+ graph_by_date_enum(
+   "av_duration",
+   "Average Survey Duration (Mins)"
+ )
+  
+ graph_save("avgduration_day_enum.png")
+  
+  
+### Average response to a question per day -------------------------------------
+  
+ graph_by_date(
+   "av_matatus",
+   "Number of Matatus Owned (Average)"
+ )
+  
+ graph_save("avganswer_day.png")
+  
+  
+### Average response to a question per day per enumerator ----------------------
+  
+ graph_by_date_enum(
+   "av_matatus",
+   "Number of Matatus Owned (Average)"
+ )
+
+ graph_save("avganswer_day_enum.png")
+  
+  
+### Share of 'other' per day ---------------------------------------------------
+
+ graph_by_date(
+   "share_other",
+   "Share of 'Other Challenges' Selected"
+ )
+
+ graph_save("avgother_day.png")
+  
+  
+### Share of 'other' per day per enumerator ------------------------------------
+  
+ graph_by_date_enum(
+   "share_other",
+   "Share of 'Other Challenges' Selected"
+ )
+ 
+ graph_save("avgother_day_enum.png")
+  
   ## Create a function,
 
     produce_sumtable <- 
