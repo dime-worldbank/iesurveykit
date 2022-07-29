@@ -7,4 +7,4 @@ Here we provide detailed instructions for preparing your electronic survey with 
 3. [Set up HFC Dashboard](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/3-set-up-hfc-dashboard.md)
 4. [Complementary analysis](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/4-complementary-analysis-r.md)
 
-We also outline some [best practices and commonly faced issues] in setting up these real time HFC dashboards.
+We also outline some [best practices and commonly faced issues](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/best-practices-and-issues.md) in setting up these real time HFC dashboards.
