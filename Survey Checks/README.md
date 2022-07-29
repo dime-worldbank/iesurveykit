@@ -1,22 +1,17 @@
 # Survey checks
 
 Here we provide detailed instructions for preparing your electronic survey with the aim of adding survey checks and creating a real-time high-frequency check dashboard.
-
-As shown in the flowchart below, there are four main steps for creating a real-time HFC dashboard.
-
-1. First, we need to upload a static preloaded dataset into SurveyCTO as a server dataset.
-2. Then, we attach this server dataset to the main survey form so that we can reference preloaded data in our survey form.
-3. Next, by using the “Publish” command, we stream data from new submissions back into the server dataset and reuse it for the next submission. This feature allows us to turn a static preloaded dataset into a dynamic one. Therefore, we can track the completion status and survey outcomes from previous submissions. Similarly, data from new submissions can also be exported to an external Google Sheet,
-where we can set up the HFC dashboard by leveraging Google Sheet functions to create descriptive statistics tables and graphs. As survey submissions will be automatically published to the Google Sheet, the HFC dashboard is also updated automatically.
-
 The HFC dashboard provides snapshot of a subset of the data including:
 1. Enumerator Tracking tab: Completion / Responses
 2. Enumerator Productivity tab (time):
 3. A few data points (1 per module mapped out - especially focusing on questions that lead the survey to be longer as enumerators may be inclined to answer a certain way to shorten survey)
+4. These outputs can be complemented with some analysis in R to deep dive into the data and provide more insights on the data quality.
 
-These outputs can be complemented with some analysis in R to deep dive into the data and provide more insights on the data quality.
+1. [Prepare Survey forms](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/1-prepare-scto-forms.md)
+2. [Adapt Survey forms](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/2-adapt-scto-forms.md)
+3. [Set up HFC Dashboard](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/3-set-up-hfc-dashboard.md)
+4. [Complementary analysis](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/4-complementary-analysis-r.md)
 
-<i> to add flowchart image & table </i>
 
 ### Data Security and Encryption
 Almost all the data we collect include information that can be used to identify who the respondent is.
@@ -48,8 +43,8 @@ These surveys e designed to pull modules and survey completion dynamically from 
 ### Commonly faced issues
 
 1. <b> Duplicates</b>  are created and go unnoticed in 1 of 2 ways
-  1. Completed surveys: This occurs when an enumerator does not upload completed surveys to the server. Thus, the server dataset does not mark the survey as completed. The next time an enumerator attempts the same UID/HHID it will not alert you that this has already been filled, and thus leads to it being filled again.
-  2. Incomplete surveys: This issue occurs when a surveyor makes an attempt wherein they are unable to start the survey or are only able to complete it partially, and are unable to send these surveys to the server. Thus, even if a second or greater attempt is made without the server dataset being updated, anyone else attempting the same HHID/UID will not see the latest number of attempts made. This also creates an issue in partially completed surveys. If a survey is partially completed till module X without the dataset being updated, the next attempt will start the survey at whichever point it was last updated instead of at module X+1.
+  - Completed surveys: This occurs when an enumerator does not upload completed surveys to the server. Thus, the server dataset does not mark the survey as completed. The next time an enumerator attempts the same UID/HHID it will not alert you that this has already been filled, and thus leads to it being filled again.
+  - Incomplete surveys: This issue occurs when a surveyor makes an attempt wherein they are unable to start the survey or are only able to complete it partially, and are unable to send these surveys to the server. Thus, even if a second or greater attempt is made without the server dataset being updated, anyone else attempting the same HHID/UID will not see the latest number of attempts made. This also creates an issue in partially completed surveys. If a survey is partially completed till module X without the dataset being updated, the next attempt will start the survey at whichever point it was last updated instead of at module X+1.
 
 2. <b> Imperfect number of attempts </b>: The survey captures the number of attempts incorrectly owing to poor network and bad practices. For example, you make one attempt which is uploaded to the server; and then you make further attempts (which would be attempt 2, 3, 4, 5) but do not upload them to the server immediately, but instead altogether later (i.e. they aren’t sequentially uploaded to the server because of internet connection or bad practices). Then once you do upload all, the tracker doesn’t register this as 4 separate attempts, it registers it as a second attempt only.
 
