@@ -4,7 +4,9 @@ These surveys are designed to pull modules and survey completion dynamically fro
 - Wait 5-10 minutes after each submission before starting the next one
 - Compare the attempt counter note shown in the survey form with the one listed in the Google Sheet to ensure the preloaded data is up-to-date
 - Notes for better data management:
-  - When you’re on a mobile network, SurveyCTO doesn’t automatically upload the surveys to the server. It waits until you’re connected to WiFi or requires you to upload the surveys manually. This is why we see lags in survey submission. This can be changed within the application (under General Settings) to allow for automatic upload when any mobile network is available. However, if enumerators are working in areas with little to no internet coverage, this will remain an issue. Ultimate decision - depends on WiFi and/or mobile network availability
+  - When you’re on a mobile network, SurveyCTO doesn’t automatically upload the surveys to the server. It waits until you’re connected to WiFi or requires you to upload the surveys manually. This is why we see lags in survey submission. This can be changed within the application (under General Settings) to allow for automatic upload when any mobile network is available. However, if enumerators are working in areas with little to no internet coverage, this will remain an issue. Ultimate decision - depends on WiFi and/or mobile network availability.
+  <img src="https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/img/image8.png" width="75%"><!--- Image is read from master branch or use full URL-->
+
 - Protocols for updating the server dataset
   - Enumerators should change SurveyCTO settings to auto upload surveys and auto download the new server dataset when connected to a MOBILE network
   - Whenever enumerators are in a network zone (whether mobile or WiFi), they should manually upload and download to ensure they are working with the most updated version. This is of utmost importance between attempts to the same household / respondent.
