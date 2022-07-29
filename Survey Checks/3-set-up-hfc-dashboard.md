@@ -1,7 +1,7 @@
 
 # Setting up a Real-time data quality checks dashboard
 
-As shown in the flowchart below, there are four main steps for creating a real-time HFC dashboard.
+There are four main steps for creating a real-time HFC dashboard.
 
   1. First, we need to upload a static preloaded dataset into SurveyCTO as a server dataset.
   2. Then, we attach this server dataset to the main survey form so that we can reference preloaded data in our survey form.

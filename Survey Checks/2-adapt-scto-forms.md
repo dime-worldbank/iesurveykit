@@ -9,14 +9,14 @@ Since the survey form needs to actively pull data from this server dataset - you
 NOTE: As the form is encrypted forms, all the following fields must be explicitly marked as “publishable” (with a “yes” in their publishable column). Fields explicitly marked as publishable are left unencrypted so that they can be conveniently published to cloud services or directly downloaded from the server.
 
     1. Generic: “Calculate” fields that pull variables from the preloaded data. There should be one “Calculate” field for each column in the preloaded data
-      * Example:  pulldata('hhplotdata', 'plot1size', 'hhid_key', ${hhid}) will pull a value from an attached server dataset called hhplotdata (This is the dataset id you entered when you created the server datset). The value will come from the plot1size column of the pre-loaded data, and the hhid field will be used to identify the matching row in the pre-loaded data's hhid_key column
+      * Example:  `pulldata('hhplotdata', 'plot1size', 'hhid_key', ${hhid})` will pull a value from an attached server dataset called hhplotdata (This is the dataset id you entered when you created the server dataset). The value will come from the plot1size column of the pre-loaded data, and the hhid field will be used to identify the matching row in the pre-loaded data's `hhid_key` column
       * Recommended naming convention:  adding a “_pl” suffix to the original name
 
     2. For tracking: A “Calculate” field that updates the <b?attempt counter</b> variable every time the enumerator submits a survey.
-    * xample: ${attempt_counter_pl} + 1, where attempt_counter_pl is the name of the pulled variable
+    * Example: `${attempt_counter_pl} + 1, where attempt_counter_pl` is the name of the pulled variable
 
     3. For tracking: Two “Calculate” fields that respectively update the <b>completion status</b> variable and the <b>survey outcome variable</b> every time the enumerator submits a survey
-      * This can be created by setting the ifelse argument with/or coalesce argument. For specific examples, please see the surveycto form template.
+      * This can be created by setting the ifelse argument with/or coalesce argument. For specific examples, please see the SurveyCTO form template.
       * Recommended naming convention: adding a “_update” suffix to distinguish from the pulled variables
 2. <b> Additional optional changes </b> : module completion checks:
       1. <b> Submission in the middle of a survey: </b>
