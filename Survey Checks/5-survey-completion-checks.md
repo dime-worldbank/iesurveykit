@@ -8,12 +8,12 @@ Prepare the high frequency checks survey form as detailed in [Prepare Survey For
 #### With module completion status
 
 In addition to the variables listed in (Preparing Survey Forms](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/1-prepare-scto-forms.md), the original preloaded data should also include the following item:
-(see Preload Sample (with Module Completion) - Part A)
+[(see Preload Sample (with Module Completion) - Part A)](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/scto/Preloaded%20Data%20Sample%20(With%20Module%20Completion).xlsx)
 
   5. last module completion status column with pre-assigned values of 0 (0 module completed):  This variable describes the last module completed by the respondent. Assuming your survey has 5 modules in total and the 5 modules are organized in a sequential order, in the cases where the respondent left in the middle of the survey, this variable will be changed from 0 to X (X is the number of modules completed by the respondent before leaving). Next time when the enumerator opens the same survey, it will start from the (X + 1)th module instead of the first module.
 
 You will also need to prepare another preload data sheet (extra!) with 2 columns:
-(see Preload Sample (with Module Completion)- Part B)
+[(see Preload Sample (with Module Completion)- Part B)](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/scto/Preloaded%20Data%20Sample%20(With%20Module%20Completion).xlsx)
 
   1. module name: the name of each module
   2. module index: the corresponding index of each module (e.g. index = 1 if it is the first module appeared in the survey, index = 2 if it is the second module appeared in the survey)

@@ -14,11 +14,11 @@ We also outline some [best practices and commonly faced issues](https://github.c
 ## Relevant Links
 ### SurveyCTO Forms and preload datasets </b>  
 1. Without module completion
-  - Survey Form Template
+  - [Survey Form Template](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/scto/Survey%20Form%20Template%20(without%20module%20completion).xlsx)
   - [Preload dataset](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/scto/Preloaded%20Data%20Sample.xlsx)
   - [SurveyCTO form test and fill](https://boruis.surveycto.com/collect/demo_survey?caseid=)
 
-2. With module completion -
+2. With module completion
 - Survey Form Template
 - [Preload dataset](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/scto/Preloaded%20Data%20Sample%20(With%20Module%20Completion).xlsx)
 - [SurveyCTO form test and fill](https://boruis.surveycto.com/collect/demo_survey_module_completion?caseid= )

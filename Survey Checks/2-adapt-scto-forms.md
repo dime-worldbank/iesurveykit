@@ -41,7 +41,7 @@ NOTE: As the form is encrypted forms, all the following fields must be explicitl
       5. <b>Check whether a response was changed:</b>
          - By adding a “calculate here” field with the expression “once(${fieldname})” right after the question, we are able to capture the initial response entered to see if the enumerators/respondents fill in answers and then go back to change them.
          - As this expression only captures the initial responses, it is recommended to add one additional calculate field with the argument “if(once(${fieldname}) != ${fieldname}, 1, 0)” to create a dummy variable that returns 1 if the answer is changed.
-         - For more information, see the form template or this link.
+         - For more information, see the form template or this [link](https://www.surveycto.com/best-practices/using-calculations/).
        6. <b>Monitor Module Duration:</b>
         - Create a “calculate here” field with the expressions “once(format-date-time(now(), '%Y-%b-%e %H:%M:%S'))” at the beginning and the end of a module to capture the start time and end time for the module.
         - This allows you to track how long an enumerator completes a module.

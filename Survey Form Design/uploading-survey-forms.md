@@ -1,6 +1,6 @@
 # Uploading Survey Forms and Preloads on surveycto
 
-Detailed below are instructions to upload an XLSForm and preload dataset to SurveyCTO and how to utlize the publishing features.
+Detailed below are instructions to upload an XLSForm and preload dataset to SurveyCTO and how to utilize the publishing features.
 1.  Upload main form into SurveyCTO using [these instructions](https://support.surveycto.com/hc/en-us/articles/360050736773-Deploying-form-definitions-and-server-datasets)
 2.  Upload preloaded data into SurveyCTO as a server dataset and attaching to the survey form:
   -   Uploading preloaded data into SurveyCTO as a server dataset:

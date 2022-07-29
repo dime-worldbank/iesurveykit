@@ -13,16 +13,14 @@ The first step is to create a SurveyCTO data-collection form. Instructions on ho
   | ------------- | ------------- | ------------ | ------------ | ------------ |
   | Complete | Responded | Green | Respondent agreed to participate and completed the survey | Respondent agreed to participate and completed all modules |
   | Complete | Non-responded | Red | Respondent refused to participate or was unable to conduct the survey due to illness, death, wrong number |Respondent refused to participate or was unable to conduct the survey due to illness, death, wrong number |
-  | Incomplete (Call Back) | Pending | Yellow | Respondent did not answer the call or was busy and wanted to reschedule   (NOTE: if enumerators have called 3 times but the respondent never answered the call or kept rescheduling, the survey status will then become “Completed, Non-responded”) |
-  | a. Respondent did not answer the call or was busy and wanted to reschedule. b. Respondent agreed to participate but did not complete all modules (NOTE: if enumerators have called 3 times but the respondent never answered the call or kept rescheduling, the survey status will then become “Completed, Non-responded”) |
+  | Incomplete (Call Back) | Pending | Yellow | Respondent did not answer the call or was busy and wanted to reschedule   (NOTE: if enumerators have called 3 times but the respondent never answered the call or kept rescheduling, the survey status will then become “Completed, Non-responded”) | a. Respondent did not answer the call or was busy and wanted to reschedule. b. Respondent agreed to participate but did not complete all modules (NOTE: if enumerators have called 3 times but the respondent never answered the call or kept rescheduling, the survey status will then become “Completed, Non-responded”) |
 
 ### Prepare pre-loaded dataset
 
-#### Without modules tracker
 The preloaded data should include at least the following items:
-(see Preload Sample (without Module Completion))
+[(see Preload Sample (without Module Completion))](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/scto/Preloaded%20Data%20Sample.xlsx))
 
-  1. basic survey information such as the household/respondent id and assigned enumerator name.  Household/respondent ID should be unique
-  2. an attempt counter column with pre-assigned values of 0 (0 submissions). This variable describes the number of previous submissions for each survey
-  3. a completion status column with pre-assigned values of 0 (Incomplete). This variable will be changed to 1 once the survey is completed by the enumerator
-  4. a survey outcome column with pre-assigned values of 2 (Pending).  Once the completion status becomes 1, this variable will be changed to 1 if the survey is filled out by the respondent or to 0 if the survey is NOT filled out by the respondent
+  1. Basic survey information such as the household/respondent id and assigned enumerator name.  Household/respondent ID should be unique
+  2. An attempt counter column with pre-assigned values of 0 (0 submissions). This variable describes the number of previous submissions for each survey
+  3. A completion status column with pre-assigned values of 0 (Incomplete). This variable will be changed to 1 once the survey is completed by the enumerator
+  4. A survey outcome column with pre-assigned values of 2 (Pending).  Once the completion status becomes 1, this variable will be changed to 1 if the survey is filled out by the respondent or to 0 if the survey is NOT filled out by the respondent
