@@ -27,12 +27,14 @@ These outputs can be complemented with some analysis in R to deep dive into the 
       - Repeat steps in section II-C-iii-c
       - Add any additional variables you need for the HFC dashboard, including but not limited to survey duration for evaluating enumerator performance, outcome variables for outlier checks, etc...
       <img src="https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/img/image9.png"><!--- Image is read from master branch or use full URL-->
+      
+### Elements to include in HFC Dashboard
 
-2. Create HFC tabs
 
-Leveraging functions in Google Sheet to create HFC dashboard: After setting up the Google Sheet connection in SurveyCTO, your data will be automatically streamed into the connected Google Sheet after every submission. The final step is to build up the HFC dashboard inside the Google Sheet by using Pivot Tables and other functions. The shared template includes the following elements:
+Leveraging functions in Google Sheet to create HFC dashboard: After setting up the Google Sheet connection in SurveyCTO, your data will be automatically streamed into the connected Google Sheet after every submission. The final step is to build up the HFC dashboard inside the Google Sheet by using Pivot Tables and other functions. 
 
 REMEMBER - Convert all columns in google sheet into text format before exporting any data.
+
 
   1. <b>Tracking Sheet</b>: This sheet is designed for FCs and enumerators to track the progress of each survey. It is created by first referencing relevant information from the exported sheet and then using conditional formatting to highlight “incomplete” surveys (definitions of “complete” vs “incomplete” surveys are detailed in section I-A). This sheet should be similar to the raw, exported data but with finer formatting.
 
