@@ -102,7 +102,7 @@
      )
    )
 
- # Clean date variables
+ # Clean the data
  surveys <-
    surveys %>%
    mutate(
@@ -121,16 +121,20 @@
      )
    )
      
-     
-## Number of surveys per day + per day/per enumerator --------------------------
 
+## Summarise data by day and day+enumerator ------------------------------------
+ 
  surveys_by_date <-
    surveys %>% 
    group_by(date) %>%
    summarise(
+     # Number of survey submissions
      n_surveys = n(),
+     # Average survey duration
      av_duration = mean(duration),
+     # Average response to a question
      av_matatus = mean(matatu_own, na.rm = T),
+     # Average number of occurrences of an "other" selection
      share_other = mean(matatu_challenge_select_10, na.rm = T)
    )
  
@@ -141,47 +145,41 @@
      date
    ) %>%
    summarise(
+     # Number of survey submissions
      n_surveys = n(),
+     # Average survey duration
      av_duration = mean(duration),
+     # Average response to a question
      av_matatus = mean(matatu_own, na.rm = T),
+     # Average number of occurrences of an "other" selection
      share_other = mean(matatu_challenge_select_10, na.rm = T)
-  )
-   
-### Number of surveys per day --------------------------------------------------
-     
- graph_by_date(
-   "n_surveys",
-   "Number of Submissions"
- )
+   )
  
+## Create graphs ---------------------------------------------------------------
+
+ graph_by_date("n_surveys", "Number of Submissions")
  graph_save("nsubmission_day.png")
   
- ### Number of surveys per day per enumerator ----------------------------------
-  
- graph_by_enum_date(
-   "n_surveys",
-   "Number of Submissions"
- )
- 
+ graph_by_enum_date("n_surveys", "Number of Submissions")
  graph_save("nsubmission_day_enum.png")
  
- ### Average survey duration per day --------------------------------------
-  
- graph_by_date(
-   "av_duration",
-   "Average Survey Duration (Mins)"
- )
- 
+ graph_by_date("av_duration", "Average Survey Duration (Mins)")
  graph_save("avgduration_day.png")
   
-### Average survey duration per day per enumerator -----------------------------
-  
- graph_by_date_enum(
-   "av_duration",
-   "Average Survey Duration (Mins)"
- )
-  
+ graph_by_date_enum("av_duration", "Average Survey Duration (Mins)")
  graph_save("avgduration_day_enum.png")
+
+ graph_by_date("av_matatus", "Number of Matatus Owned (Average)")
+ graph_save("avganswer_day.png")
+  
+ graph_by_date_enum("av_matatus", "Number of Matatus Owned (Average)")
+ graph_save("avganswer_day_enum.png")
+
+ graph_by_date("share_other", "Share of 'Other Challenges' Selected")
+ graph_save("avgother_day.png")
+  
+ graph_by_date_enum("share_other", "Share of 'Other Challenges' Selected")
+ graph_save("avgother_day_enum.png")
   
   
 ### Average response to a question per day -------------------------------------
