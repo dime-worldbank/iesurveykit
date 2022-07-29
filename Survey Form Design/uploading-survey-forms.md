@@ -18,3 +18,12 @@ Detailed below are instructions to upload an XLSForm and preload dataset to Surv
       - Any dynamic variables created in form design. In the case below, these are attempt counter, completion status and survey outcome. As these variables are updated after every submission, they are published back to replace the original variables in the preloaded dataset.
     4. Under “Form field to identify unique records (optional)”, select the same variable in step two-02-d-i
     5. More information can be found [here](https://docs.surveycto.com/05-exporting-and-publishing-data/04-advanced-publishing-with-datasets/02.forms-to-datasets.html)
+
+
+### Data Security and Encryption
+    Almost all the data we collect include information that can be used to identify who the respondent is.
+    To protect respondents’ privacy and data security, the instructions below must be followed carefully.
+    Eventually we will de-identify the data so it can be shared freely among the research team; before that,
+    all data should be encrypted during each step of the survey collection process.
+
+    * Encrypting form data on SurveyCTO - When programming questionnaires in SurveyCTO, you need to create a public-private key pair for your survey and use the provided public key to encrypt your survey form. . Step by step process described in the [SurveyCTO encryption guidelines](https://github.com/worldbank/dime-standards/blob/master/dime-research-standards/pillar-4-data-security/data-security-resources/surveycto-encryption-guidelines.md).
