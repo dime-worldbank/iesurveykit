@@ -28,7 +28,8 @@ NOTE: As the form is encrypted forms, all the following fields must be explicitl
         - This check refers to the orange “Check 1” box in the survey process flowchart.
         - After the enumerator selects a household id, the survey form will check the completion status for the selected household id from the preloaded server dataset. If the completion status is equal to 1 (“Complete”), a warning note will appear preventing the enumerator from moving forward.
         - This warning is created by adding a “Note” field with a relevance expression of “${complete_status_pl} = 1”  and “required action” option set to “Yes”.
-        <img src="https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/img/image3.png" width="75%"><!--- Image is read from master branch or use full URL-->
+
+        <img src="https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/img/image3.png"><!--- Image is read from master branch or use full URL-->
 
       3. <b>Maximum number of submissions (subject to change):</b>
         - This check is designed to close a survey if the number of previous submissions has reached a certain threshold, which in the sample survey form is 5. In other words, if the enumerator has contacted the respondent 5 times and the respondent either never picked up the call or kept rescheduling, the enumerator DOES NOT have to contact the respondent again.
