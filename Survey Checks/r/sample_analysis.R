@@ -112,6 +112,27 @@
         
         return(sum_table)
     }
+  
+  format_sumtable <-
+    function(table) {
+      
+      table %>%
+      mutate(
+        across(
+          where(is.numeric), 
+          ~ round(., 2)
+        )
+      ) %>% # Formatting appearance of stats
+        kable(
+          format = "latex", # LaTeX formatting
+          format.args = list(big.mark = ","), 
+          longtable = TRUE, 
+          row.names = FALSE, 
+          booktabs = T
+        ) %>%
+        row_spec(0, bold = TRUE) %>% 
+        kable_styling()
+    }
 
 # TIME SERIES DATA QUALITY CHECKS BY ENUMERATORS -------------------------------
 
@@ -219,42 +240,21 @@
 ## TABLE: How many matatus do you own? -----------------------------------------
   
   
-  produce_sumtable( # Call on above function
-    
-    surveys$matatu_own, "Matatus Owned"
-    
-    ) %>% 
-    mutate_if(is.numeric, 
-              ~round(., 2)) %>% # Formatting appearance of stats
-    kable(format = "latex", # LaTeX formatting
-          format.args = list(big.mark = ","), 
-          longtable = TRUE, 
-          row.names = FALSE, 
-          booktabs = T) %>%
-    row_spec(0, 
-             bold = TRUE) %>% 
-    kable_styling() %>% 
-    writeLines(paste0(root, 
-                      "matatus_owned.tex")) # Export .tex file
+  produce_sumtable(
+    surveys$matatu_own, 
+    "Matatus Owned"
+  ) %>%
+    format_sumtable %>% 
+    writeLines(here("matatus_owned.tex")) # Export .tex file
   
 ## TABLE: How much did you spend on repairing breaks? --------------------------
   
   produce_sumtable(
-  
-  surveys$matatu_repair_breaks, "Break Repair Cost"
-  
+    surveys$matatu_repair_breaks, 
+    "Break Repair Cost"
   ) %>% 
-  mutate_if(is.numeric, 
-            ~round(., 2)) %>% 
-  kable(format = "latex", 
-        format.args = list(big.mark = ","), 
-        longtable = TRUE, row.names = FALSE, 
-        booktabs = T) %>%
-  row_spec(0, 
-           bold = TRUE) %>% 
-  kable_styling() %>% 
-  writeLines(paste0(root, 
-                    "matatu_repair.tex")) 
+    format_sumtable %>% 
+    writeLines(here("matatu_repair.tex")) 
   
   
 ## GRAPH: How many matatus do you own? -----------------------------------------
