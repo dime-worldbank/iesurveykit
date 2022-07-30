@@ -259,28 +259,36 @@
   
 ## GRAPH: How many matatus do you own? -----------------------------------------
   
-  ggplot(surveys, # Create the plot
-        aes(x = matatu_own)) + 
-   geom_density(fill="#69b3a2", # Plot options
-                color="#e9ecef", 
-                alpha = 0.8) +
-   scale_x_continuous(labels = comma) +
-   labs(x = "Number of Matatus Owned", # Label axes
-        y = "Density") +
-   theme_bw()
-  
-    graph_save(
-      "nmatatus_owned.png",
-      width = 25
-    )
+  surveys %>%
+    ggplot(
+      aes(x = matatu_own)
+    ) + 
+     geom_density(
+       fill="#69b3a2", # Plot options
+       color="#e9ecef", 
+       alpha = 0.8
+     ) +
+     scale_x_continuous(labels = comma) +
+     labs(
+       x = "Number of Matatus Owned", # Label axes
+       y = "Density"
+     ) +
+     theme_bw()
+    
+  graph_save(
+    "nmatatus_owned.png",
+    width = 25
+  )
   
 ## GRAPH: Do you face any challenges managing your matatu? ---------------------
   
   surveys %>% # Call upon loaded dataset
    select(mid, matatu_challenge) %>% # Select variables of interest
    mutate(tot = n_distinct(mid)) %>% # Create a new variable "tot"
-   group_by(matatu_challenge, # Group obs. by mutatu_challenge and
-            tot) %>%          # tot - the new variable created
+   group_by(
+     matatu_challenge, # Group obs. by mutatu_challenge and
+     tot
+   ) %>%          # tot - the new variable created
    summarise(n = n_distinct(mid)) %>% 
    mutate(p = n/tot) %>% # Create a new variable "p" (proportion)
    mutate(
@@ -293,24 +301,27 @@
                     
         )
      ) %>% 
-   ggplot(aes(x = reorder(matatu_challenge_label, # Create plot
-                          matatu_challenge), 
-              y = p, 
-              fill = reorder(matatu_challenge_label, 
-                             matatu_challenge))) +
-    geom_bar(stat = "identity") + # Add plot options
-    scale_fill_brewer(palette = "Reds", 
-                      guide = NULL) + 
-    scale_y_continuous(labels = percent) + 
-    labs(x = "", # Label X and Y axes
-         y = "Share of Matatu Owners") +
-    theme_bw()
-  
-      graph_save(
-        "matatu_challenge_any.png", 
-        width = 25
+   ggplot(
+     aes(
+       x = reorder(matatu_challenge_label, matatu_challenge), 
+       y = p, 
+       fill = reorder(matatu_challenge_label, matatu_challenge)
       )
-  
+    ) +
+    geom_bar(stat = "identity") + # Add plot options
+    scale_fill_brewer(palette = "Reds", guide = NULL) + 
+    scale_y_continuous(labels = percent) + 
+    labs(
+      x = "", # Label X and Y axes
+      y = "Share of Matatu Owners"
+    ) +
+    theme_bw()
+
+  graph_save(
+    "matatu_challenge_any.png", 
+    width = 25
+  )
+
   
 ## GRAPH: What challenges do you face in managing your matatu? -----------------
   
@@ -319,9 +330,11 @@
   
   df_graph <- surveys %>% 
    filter(matatu_challenge != 1) %>% 
-   select(mid, # Select only certain variables for analysis
-          matatu_challenge_select, 
-          starts_with("matatu_challenge_select")) %>% 
+   select(
+     mid, # Select only certain variables for analysis
+     matatu_challenge_select, 
+     starts_with("matatu_challenge_select")
+   ) %>% 
    select(-ends_with("_oth")) %>% 
    pivot_longer( # Convert wide data to long form
     cols         = -c(mid, matatu_challenge_select), # Columns from
@@ -348,21 +361,23 @@
   # Now we define some other objects. 
   
   n_sample <- 
-  df_graph$mid %>% # Using 'mid' variable from df_graph
-  n_distinct() # Only distinct values, no duplicates
+    df_graph$mid %>% # Using 'mid' variable from df_graph
+    n_distinct() # Only distinct values, no duplicates
   
   n_options <- 
-  df_graph$option_label %>% # Using values from 'option_label' var
-  n_distinct() 
+    df_graph$option_label %>% # Using values from 'option_label' var
+    n_distinct() 
   
   # Now we start creating the plot using df_graph and objects defined
   
   
   df_graph %>%
   group_by(option_label) %>% # Group by 'option_label"
-  summarise(tot = n(),       # Collapses dataset into variable of 
-            n = sum(yesno),  # interest, which is, 'p', which gives
-            p = n/tot) %>%   # share of owners who faced a challenge
+  summarise(
+    tot = n(),       # Collapses dataset into variable of 
+    n = sum(yesno),  # interest, which is, 'p', which gives
+    p = n/tot
+  ) %>%   # share of owners who faced a challenge
   mutate( 
     order = ifelse( 
       option_label == "Other", # Changes 'option_label' to 1 if 
@@ -371,28 +386,34 @@
     option_label = str_to_title(option_label), 
     option_label = str_wrap(option_label, 40)
   ) %>%
-  filter(n != 0 ) %>% # Only keep obs with non-zero values of n
-    ggplot(aes( # Create plot after we have data in desired form
-               x = reorder(option_label, # X axis
-                           order), 
-               y = p, fill = reorder(option_label, # Y axis
-                                     order))) + 
+  filter(n != 0) %>% # Only keep obs with non-zero values of n
+    ggplot(
+      aes( # Create plot after we have data in desired form
+        x = reorder(option_label, order), 
+        y = p, 
+        fill = reorder(option_label, order)
+      )
+    ) + 
       geom_bar(stat = "identity") + # Add plot options
       scale_fill_manual(values = magma(n_options), 
                         guide = NULL) +
       scale_y_continuous(labels = percent) +
       theme_bw() + 
-      labs(x = "", 
-           y = paste0("Share of Matatu Owners (N = ", 
-                      comma(n_sample), 
-                      ")")) +
-      coord_flip();
-  
-        graph_save(
-          "matatu_challenge.png",
-          width = 25
+      labs(
+        x = "", 
+        y = paste0(
+          "Share of Matatu Owners (N = ", 
+          comma(n_sample), 
+          ")"
         )
+      ) +
+      coord_flip()
   
+  graph_save(
+    "matatu_challenge.png",
+    width = 25
+  )
+
   
 ## GRAPH: How much did you spend on repairing breaks? --------------------------
   
