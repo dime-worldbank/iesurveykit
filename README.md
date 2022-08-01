@@ -2,7 +2,7 @@
 
 The **`iesurveykit`**  is a package of tools to support high-quality primary data collection.
 
-This goes hand in hand with [iefieldkit](https://github.com/worldbank/iefieldkit).
+This goes hand in hand with [iefieldkit](https://github.com/worldbank/iefieldkit), a suite of Stata commands related to processing primary data. 
 
 ### Content
 iesurveykit currently supports three major components of the survey workflow survey design; survey completion; and data cleaning and survey harmonization.
