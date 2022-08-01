@@ -2,10 +2,6 @@
 
 The `iesurveychecks` toolkit details the full workflow to create a dashboard for [real-time data quality checks](https://dimewiki.worldbank.org/High_Frequency_Checks) of survey data. This toolkit takes as an input a questionnaire programmed using SurveyCTO software and produces a dashboard using Google Sheets.
 
-## Steps to create the real time dashboard
-1. [Prepare Survey forms](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/1-prepare-scto-forms.md)
-2. [Adapt Survey forms](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/2-adapt-scto-forms.md)
-
 
 ## Real time Google Sheets dashboard
 
