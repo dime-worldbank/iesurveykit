@@ -1,6 +1,6 @@
 # iesurveykit - Tools for high quality Impact Evaluation Surveys
 
-The **`iesurveykit`**  is a package of resources for primary data collection.
+The **`iesurveykit`**  is a package of tools to support high-quality primary data collection.
 
 This goes hand in hand with [iefieldkit](https://github.com/worldbank/iefieldkit).
 
