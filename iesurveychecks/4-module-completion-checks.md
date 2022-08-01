@@ -1,23 +1,52 @@
-# Survey Completion
+# Advanced: Module Completion Checks
 
 A module completion tracker is useful for very long surveys which are broken down in parts. You can create your survey forms such that module completion is tracked along with the HFCs.
 
 ### How to add survey completion checks
-Prepare the high frequency checks survey form as detailed in [Prepare Survey Forms]() and supplement with the following instructions.
+Prepare the high frequency checks survey form as detailed in [Adapt Survey Forms](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/1-adapt-scto-forms.md) and supplement with the following instructions.
 
-#### With module completion status
 
-In addition to the variables listed in (Preparing Survey Forms](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/1-prepare-scto-forms.md), the original preloaded data should also include the following item:
-[(see Preload Sample (with Module Completion) - Part A)](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/scto/Preloaded%20Data%20Sample%20(With%20Module%20Completion).xlsx)
+## Advanced changes in the survey form for module completion checks:
+1. <b> Submission in the middle of a survey: </b>
+- A yesno “select_one” field at the end of every module (except the last module) that asks “Is the respondent still available? (Please select “No” if you agreed to stop the survey here and start again a some other time)"
+- A “calculate” field (must be placed at the end of the survey) for every module you have in the survey. This variable tracks the completion status for each module.  It should be equal to 1 if a particular module is completed and otherwise 0.
+- A “calculate” field that adds up the <b>last_module_completed</b> variable pulled from the preload sheet and all the 0-1 module completion status calculate fields you created for each module.
+Add a relevance expression for every module group you have in your survey form so that only modules that are not completed in the previous submissions are visible to the respondents.
+2. <b>Duplicate submissions check:</b>
+- This check refers to the orange “Check 1” box in the survey process flowchart.
+- After the enumerator selects a household id, the survey form will check the completion status for the selected household id from the preloaded server dataset. If the completion status is equal to 1 (“Complete”), a warning note will appear preventing the enumerator from moving forward.
+- This warning is created by adding a “Note” field with a relevance expression of “${complete_status_pl} = 1”  and “required action” option set to “Yes”.
+<img src="https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/img/image3.png"><!--- Image is read from master branch or use full URL-->
+3. <b>Maximum number of submissions (subject to change):</b>
+- This check is designed to close a survey if the number of previous submissions has reached a certain threshold, which in the sample survey form is 5. In other words, if the enumerator has contacted the respondent 5 times and the respondent either never picked up the call or kept rescheduling, the enumerator DOES NOT have to contact the respondent again.
+- This check is created by pulling the attempt counter variable from the preloaded dataset. If attempt counter + 1 is equal to the threshold, completion status will be changed from “Incomplete” to “Complete”, and survey outcome will be changed from “Pending” to “Non-responded”.
+4. <b>Next call date (subject to change):</b>
+- This constraint refers to the 7.1 box in the survey process flowchart.
+- If no one answers the phone or the respondent reschedules with the enumerator, the enumerator needs to enter a next call date and time. The next call date must be within the next 2 days.
+- This constraint is created by adding a constraint expression of `“( number(${next_call_datetime}) - number(now()) ) <= 2”`.
+5. <b>Check whether a response was changed:</b>
+ - By adding a “calculate here” field with the expression “once(${fieldname})” right after the question, we are able to capture the initial response entered to see if the enumerators/respondents fill in answers and then go back to change them.
+ - As this expression only captures the initial responses, it is recommended to add one additional calculate field with the argument “if(once(${fieldname}) != ${fieldname}, 1, 0)” to create a dummy variable that returns 1 if the answer is changed.
+ - For more information, see the form template or this [link](https://www.surveycto.com/best-practices/using-calculations/).
+6. <b>Monitor Module Duration:</b>
+- Create a “calculate here” field with the expressions “once(format-date-time(now(), '%Y-%b-%e %H:%M:%S'))” at the beginning and the end of a module to capture the start time and end time for the module.
+- This allows you to track how long an enumerator completes a module.
+7. <b>Enumerator Check:</b>
+- It's often better to assign enumerators to each survey ahead of time, but when you can't then we propose the following:
+- The enumerator selects their name, the village, and the farmer’s name/household ID they want to survey.
+- For every submitted survey, we track the enumerator’s name so that if the survey is not completed, a note will appear the next time the survey is opened to remind whomever is opening the survey who the previous enumerator to complete the survey was.  
+
+
+In addition to the variables listed in [# Setting up a Real-time data quality checks dashboard](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/2-set-up-hfc-dashboard.md), the original preloaded data should also include the following item:
+[(see Preload Sample (with Module Completion) - Part A)](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/scto/Preloaded%20Data%20Sample%20(With%20Module%20Completion).xlsx)
 
   5. last module completion status column with pre-assigned values of 0 (0 module completed):  This variable describes the last module completed by the respondent. Assuming your survey has 5 modules in total and the 5 modules are organized in a sequential order, in the cases where the respondent left in the middle of the survey, this variable will be changed from 0 to X (X is the number of modules completed by the respondent before leaving). Next time when the enumerator opens the same survey, it will start from the (X + 1)th module instead of the first module.
 
 You will also need to prepare another preload data sheet (extra!) with 2 columns:
-[(see Preload Sample (with Module Completion)- Part B)](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/scto/Preloaded%20Data%20Sample%20(With%20Module%20Completion).xlsx)
+[(see Preload Sample (with Module Completion)- Part B)](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/scto/Preloaded%20Data%20Sample%20(With%20Module%20Completion).xlsx)
 
   1. module name: the name of each module
   2. module index: the corresponding index of each module (e.g. index = 1 if it is the first module appeared in the survey, index = 2 if it is the second module appeared in the survey)
-
 
 ### The benefits/drawbacks of module completion
 
