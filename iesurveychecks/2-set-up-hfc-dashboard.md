@@ -1,6 +1,7 @@
 
 # Setting up a Real-time data quality checks dashboard
 
+
 As shown in the flowchart below, there are four main steps for creating a real-time HFC dashboard.
 <img src="https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/img/image7.png"><!--- Image is read from master branch or use full URL-->
 
@@ -30,10 +31,9 @@ These outputs can be complemented with some analysis in R to deep dive into the 
 
 ### Elements to include in HFC Dashboard
 
-
 Leveraging functions in Google Sheet to create HFC dashboard: After setting up the Google Sheet connection in SurveyCTO, your data will be automatically streamed into the connected Google Sheet after every submission. The final step is to build up the HFC dashboard inside the Google Sheet by using Pivot Tables and other functions.
 
-REMEMBER - Convert all columns in google sheet into text format before exporting any data.
+REMEMBER - Convert all columns in Google Sheets into text format before exporting any data.
 
 
   1. <b>Tracking Sheet</b>: This sheet is designed for FCs and enumerators to track the progress of each survey. It is created by first referencing relevant information from the exported sheet and then using conditional formatting to highlight “incomplete” surveys (definitions of “complete” vs “incomplete” surveys are detailed in section I-A). This sheet should be similar to the raw, exported data but with finer formatting.
@@ -67,3 +67,20 @@ REMEMBER - Convert all columns in google sheet into text format before exporting
       - `Enum_Wise` demonstrates how to view performance of one or more enumerators over time. Similarly, `Date_Wise` allows us to view performance on a particular day or selected dates by all enumerators. This is relevant if there are some dates which are crucial to monitor, or if a single or group of enumerators’ performance needs to be observed. The filters can be updated even without access to edit the dashboard.
 
 Details on how to use the Google sheets functions used in the real time HFC dashboard can be found [here](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/google-functions.md).
+
+
+
+
+The template real time data quality checks dashboard uses conditional formatting to highlight different types of Completion and Survey Outcomes. 
+- <b> Completion Status (complete vs incomplete) </b>: This variable describes the result of the survey from the perspective of the enumerators. “Complete” surveys are surveys requiring NO FURTHER action from the enumerators regardless of whether the survey is filled out by the respondent or not. Specifically, in the survey process flowchart, “complete” surveys refer to the end node boxes highlighted in green and red, while “incomplete” surveys are the box highlighted in yellow.
+- <b> Survey Outcomes (pending vs responded vs non-responded) </b>: This variable describes the result of survey from the research perspective. It further divides “complete” surveys into “responded” surveys and “non-response” surveys.  Specifically,
+  - “Pending” surveys are incomplete surveys (yellow box)
+  - “Responded” surveys are “complete” surveys filled out by the respondents (green box)
+  - “Non-responded” surveys are “complete” surveys but NOT filled out by the respondents (red box). This could happen if the respondent is unavailable, refuses to participate or keeps rescheduling.
+
+
+| Completion Status | Survey Outcome  | Color of End Node Box |Without Module Completion | With Module Completion|
+| ------------- | ------------- | ------------ | ------------ | ------------ |
+| Complete | Responded | Green | Respondent agreed to participate and completed the survey | Respondent agreed to participate and completed all modules |
+| Complete | Non-responded | Red | Respondent refused to participate or was unable to conduct the survey due to illness, death, wrong number |Respondent refused to participate or was unable to conduct the survey due to illness, death, wrong number |
+| Incomplete (Call Back) | Pending | Yellow | Respondent did not answer the call or was busy and wanted to reschedule   (NOTE: if enumerators have called 3 times but the respondent never answered the call or kept rescheduling, the survey status will then become “Completed, Non-responded”) | a. Respondent did not answer the call or was busy and wanted to reschedule. b. Respondent agreed to participate but did not complete all modules (NOTE: if enumerators have called 3 times but the respondent never answered the call or kept rescheduling, the survey status will then become “Completed, Non-responded”) |
