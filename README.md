@@ -7,4 +7,4 @@ This goes hand in hand with [iefieldkit](https://github.com/worldbank/iefieldkit
 ### Content
 iesurveykit currently supports three major components of the survey workflow: (1) questionnaire design; (2) survey data quality monitoring; and (3) data cleaning and survey harmonization.
 * [Templates for survey data quality checks, including a dashboard for real-time data checks)](https://github.com/dime-worldbank/iesurveykit/tree/initial-update/Survey%20Checks)
-* [Guidelines on Survey form design](https://github.com/dime-worldbank/iesurveykit/tree/initial-update/Survey%20Form%20Design)
+* [Guidelines on questionnaire design](https://github.com/dime-worldbank/iesurveykit/tree/initial-update/Survey%20Form%20Design)
