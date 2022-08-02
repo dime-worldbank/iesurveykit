@@ -13,7 +13,7 @@ Detailed below are instructions to upload an XLSForm and preload dataset to Surv
   1. Under the SurveyCTO console’s Design tab, click the “Attach” icon on the selected server dataset and then check the survey form you want to attach
   2. This step allows users to reference variables in the preloaded dataset.      
 
-    <img src="https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/img/image1.png" ><!--- Image is read from master branch or use full URL-->
+     <img src="https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/img/image1.png" ><!--- Image is read from master branch or use full URL-->
 
 3. Publishing form submissions back to the server dataset:     
     1. Under the SurveyCTO console’s Design tab, click the “Publish into” icon on the selected server dataset
