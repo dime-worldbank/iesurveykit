@@ -29,23 +29,3 @@ A sample of how to program these checks are detailed in [Complementary analysis]
 
 ## Advanced: Including module completion
 Long surveys or surveys dealing with sensitive topics it may be difficult to get respondents to stay for the whole duration in one sitting so this allows submission of partial surveys and can be picked up on a later date / time, even by another enumerator. In such cases, [module completion checks](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/4-module-completion-checks.md) help keep track of completion at the module level.  Please note that module completion tracker should be used judiciously as it is useful for very long surveys but is complex to set up with it's own set of challenges.
-
-## Relevant Links
-### SurveyCTO Forms and preload datasets </b>  
-1. Without module completion
-  - [Survey Form Template](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/scto/Survey%20Form%20Template%20(without%20module%20completion).xlsx)
-  - [Preload dataset](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/scto/Preloaded%20Data%20Sample.xlsx)
-  - [SurveyCTO form test and fill](https://boruis.surveycto.com/collect/demo_survey?caseid=)
-
-2. With module completion
-- Survey Form Template
-- [Preload dataset](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/scto/Preloaded%20Data%20Sample%20(With%20Module%20Completion).xlsx)
-- [SurveyCTO form test and fill](https://boruis.surveycto.com/collect/demo_survey_module_completion?caseid= )
-
-### Dashboard Template </b>  
-1. [HFC Dashboard Template (Viewer-mode)](https://docs.google.com/spreadsheets/d/16S2GlDgdeSuzAJEeML8ieDOjKYK7QzfHlrkJE6AwdC4/edit?usp=sharing)
-2. [HFC Dashboard Template (Editor-mode)](https://docs.google.com/spreadsheets/d/1iji2n0nSpS6tE4vOp9EwTb_TdvT-KC2J7wIMqw_q22M/edit?usp=sharing)  
-
-### Complementary analysis </b>  
-1. [Sample checks](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/r/sample_checks.R)
-2. [Sample analysis](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/r/sample_analysis.R)

@@ -5,6 +5,7 @@ The **`iesurveykit`**  is a package of tools to support high-quality primary dat
 This goes hand in hand with [iefieldkit](https://github.com/worldbank/iefieldkit), a suite of Stata commands related to processing primary data.
 
 ### Content
-iesurveykit currently supports three major components of the survey workflow: (1) questionnaire design; (2) survey data quality monitoring; and (3) data cleaning and survey harmonization.
-* [Templates for survey data quality checks, including a dashboard for real-time data checks)](https://github.com/dime-worldbank/iesurveykit/tree/initial-update/Survey%20Checks)
-* [Guidelines on questionnaire design](https://github.com/dime-worldbank/iesurveykit/tree/initial-update/Survey%20Form%20Design)
+`iesurveykit` currently supports three major components of the survey workflow:
+1. questionnaire design - [Guidelines on questionnaire design](https://github.com/dime-worldbank/iesurveykit/tree/initial-update/Survey%20Form%20Design)
+2. survey data quality monitoring - [Templates for survey data quality checks, including a dashboard for real-time data checks)](https://github.com/dime-worldbank/iesurveykit/tree/initial-update/Survey%20Checks) and [scripts for data quality checks](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/3-complementary-analysis-r.md)
+3. data cleaning and survey harmonization - `iecodebook` command which is part of the [iefieldkit](https://github.com/worldbank/iefieldkit) package

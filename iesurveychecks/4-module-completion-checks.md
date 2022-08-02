@@ -2,7 +2,7 @@
 
 A module completion tracker is useful for very long surveys which are broken down in parts. You can create your survey forms such that module completion is tracked along with the HFCs.
 
-### How to add survey completion checks
+## How to add survey completion checks
 Prepare the high frequency checks survey form as detailed in [Adapt Survey Forms](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/1-adapt-scto-forms.md) and supplement with the following instructions.
 
 
@@ -48,7 +48,7 @@ You will also need to prepare another preload data sheet (extra!) with 2 columns
   1. module name: the name of each module
   2. module index: the corresponding index of each module (e.g. index = 1 if it is the first module appeared in the survey, index = 2 if it is the second module appeared in the survey)
 
-### The benefits/drawbacks of module completion
+## The benefits/drawbacks of module completion
 
 1. <b> Advantages </b> - In long surveys or surveys dealing with sensitive topics it may be difficult to get respondents to stay for the whole duration in one sitting so this allows submission of partial surveys and can be picked up on a later date / time, even by another enumerator.
 2. <b> Disadvantages </b>  - It can be time consuming to code up and the code is prone to errors. Next, when you start up an incomplete survey, it will start after the last module not question so if halfway through module X the respondent drops off, the next time the survey will begin at module X’s first question, so you lose data.
@@ -58,7 +58,7 @@ You will also need to prepare another preload data sheet (extra!) with 2 columns
 Module trackers are great for long surveys but come with a set of challenges, so if your survey is short we advice considering the pros and cons of adding module completion trackers to the surveys.
 
 
-### How it works (if you’re interested)
+## How it works (if you’re interested)
 
 When you submit module A, and then you go back to do the survey again and submit module B - in principle we would think that SurveyCTO would overwrite module A and show an incomplete survey but it seems to be keeping the data from module A in the first submission.
 
@@ -67,3 +67,31 @@ When you submit module A, and then you go back to do the survey again and submit
 - Example (1): In the form template, we asked the enumerators to enter the next call date (field label: `next_call_datetime`) if the respondent is unavailable right now. If the enumerator is able to complete the survey with the respondent, this question will not be shown to the enumerator. Therefore, this field (`next_call_datetime`) will have an implicit null value under such circumstances. However, in the form template, there is a calculate field that formats results from the `next_call_datetime` field. Since it is a “calculate” field, though hidden, it is always updated with every submission. Therefore, this field will have an explicit null value even if the enumerator is never asked to enter a next call date.
   - This means that if the survey is submitted a second time (and completed that second time) the enumerator will not have to fill this out, and the `next_call_datetime` field will remain empty. However, because it is an explicit null value due to the presence of calculate field that formats the result, this data will overwrite any previously stored `next_call_datetime` from an incomplete survey submitted earlier.
 - Example (2): Say an enumerator completes Module A on the first attempt, and then when he calls back he is brought to Module B (because module A was already completed). Then in this second survey, all the values from Module A are implicit null (never prompted to fill these out because it was already completed); and values from Module B are filled in. When google sheets exports the data Module A will not be ‘overwritten’ because they are implicit nulls.
+
+
+
+## Ease of reading the checks
+
+The template real time data quality checks dashboard uses conditional formatting to highlight different types of Completion and Survey Outcomes.
+
+- <b> Completion Status (complete vs incomplete) </b>: This variable describes the result of the survey from the perspective of the enumerators. “Complete” surveys are surveys requiring NO FURTHER action from the enumerators regardless of whether the survey is filled out by the respondent or not. Specifically, in the survey process flowchart, “complete” surveys refer to the end node boxes highlighted in green and red, while “incomplete” surveys are the box highlighted in yellow.
+- <b> Survey Outcomes (pending vs responded vs non-responded) </b>: This variable describes the result of survey from the research perspective. It further divides “complete” surveys into “responded” surveys and “non-response” surveys.  Specifically,
+  - “Pending” surveys are incomplete surveys (yellow box)
+  - “Responded” surveys are “complete” surveys filled out by the respondents (green box)
+  - “Non-responded” surveys are “complete” surveys but NOT filled out by the respondents (red box). This could happen if the respondent is unavailable, refuses to participate or keeps rescheduling.
+
+
+| Completion Status | Survey Outcome  | Color of End Node Box |Without Module Completion | With Module Completion|
+| ------------- | ------------- | ------------ | ------------ | ------------ |
+| Complete | Responded | Green | Respondent agreed to participate and completed the survey | Respondent agreed to participate and completed all modules |
+| Complete | Non-responded | Red | Respondent refused to participate or was unable to conduct the survey due to illness, death, wrong number |Respondent refused to participate or was unable to conduct the survey due to illness, death, wrong number |
+| Incomplete (Call Back) | Pending | Yellow | Respondent did not answer the call or was busy and wanted to reschedule   (NOTE: if enumerators have called 3 times but the respondent never answered the call or kept rescheduling, the survey status will then become “Completed, Non-responded”) | a. Respondent did not answer the call or was busy and wanted to reschedule. b. Respondent agreed to participate but did not complete all modules (NOTE: if enumerators have called 3 times but the respondent never answered the call or kept rescheduling, the survey status will then become “Completed, Non-responded”) |
+
+
+## Relevant Links
+
+### SurveyCTO Forms and preload datasets </b>  
+1. With module completion
+- Survey XLSForm Template
+- [Preload dataset](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/Survey%20Checks/scto/Preloaded%20Data%20Sample%20(With%20Module%20Completion).xlsx)
+- [Deployed SurveyCTO form test and fill](https://boruis.surveycto.com/collect/demo_survey_module_completion?caseid= )

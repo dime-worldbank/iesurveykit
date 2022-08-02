@@ -15,9 +15,9 @@ The HFC dashboard provides snapshot of a subset of the data including:
 2. Enumerator Productivity tab (time):
 3. A few data points (1 per module mapped out - especially focusing on questions that lead the survey to be longer as enumerators may be inclined to answer a certain way to shorten survey)
 
-These outputs can be complemented with some analysis in statistical softwares (such as R) to deep dive into the data and provide more insights on the data quality. More details on the complementary analysis can be found [here](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/3-complementary-analysis-r.md).
+These outputs can be complemented with some analysis in statistical software (such as R) to deep dive into the data and provide more insights on the data quality. More details on the complementary analysis can be found [here](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/3-complementary-analysis-r.md).
 
-### How to create the dashboard
+## How to create the dashboard
 1. Export form submissions to a Google Sheet to create a real-time HFC dashboard.
   1. Readying the Google Sheet: Create a Google Sheet that is the exact same as the preloaded data but without any identifiable information.
   2. Publishing form submissions to the Google Sheet:  
@@ -27,7 +27,7 @@ These outputs can be complemented with some analysis in statistical softwares (s
       - Add any additional variables you need for the HFC dashboard, including but not limited to survey duration for evaluating enumerator performance, outcome variables for outlier checks, etc...
       <img src="https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/img/image9.png"><!--- Image is read from master branch or use full URL-->
 
-### Elements to include in HFC Dashboard
+## Elements to include in HFC Dashboard
 
 Leveraging functions in Google Sheet to create HFC dashboard: After setting up the Google Sheet connection in SurveyCTO, your data will be automatically streamed into the connected Google Sheet after every submission. The final step is to build up the HFC dashboard inside the Google Sheet by using Pivot Tables and other functions.
 
@@ -66,9 +66,10 @@ REMEMBER - Convert all columns in Google Sheets into text format before exportin
 Details on how to use the Google sheets functions used in the real time HFC dashboard can be found [here](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/google-functions.md).
 
 
-
+## Ease of reading the checks
 
 The template real time data quality checks dashboard uses conditional formatting to highlight different types of Completion and Survey Outcomes.
+
 - <b> Completion Status (complete vs incomplete) </b>: This variable describes the result of the survey from the perspective of the enumerators. “Complete” surveys are surveys requiring NO FURTHER action from the enumerators regardless of whether the survey is filled out by the respondent or not. Specifically, in the survey process flowchart, “complete” surveys refer to the end node boxes highlighted in green and red, while “incomplete” surveys are the box highlighted in yellow.
 - <b> Survey Outcomes (pending vs responded vs non-responded) </b>: This variable describes the result of survey from the research perspective. It further divides “complete” surveys into “responded” surveys and “non-response” surveys.  Specifically,
   - “Pending” surveys are incomplete surveys (yellow box)
@@ -76,8 +77,21 @@ The template real time data quality checks dashboard uses conditional formatting
   - “Non-responded” surveys are “complete” surveys but NOT filled out by the respondents (red box). This could happen if the respondent is unavailable, refuses to participate or keeps rescheduling.
 
 
-| Completion Status | Survey Outcome  | Color of End Node Box |Without Module Completion | With Module Completion|
-| ------------- | ------------- | ------------ | ------------ | ------------ |
-| Complete | Responded | Green | Respondent agreed to participate and completed the survey | Respondent agreed to participate and completed all modules |
-| Complete | Non-responded | Red | Respondent refused to participate or was unable to conduct the survey due to illness, death, wrong number |Respondent refused to participate or was unable to conduct the survey due to illness, death, wrong number |
-| Incomplete (Call Back) | Pending | Yellow | Respondent did not answer the call or was busy and wanted to reschedule   (NOTE: if enumerators have called 3 times but the respondent never answered the call or kept rescheduling, the survey status will then become “Completed, Non-responded”) | a. Respondent did not answer the call or was busy and wanted to reschedule. b. Respondent agreed to participate but did not complete all modules (NOTE: if enumerators have called 3 times but the respondent never answered the call or kept rescheduling, the survey status will then become “Completed, Non-responded”) |
+| Completion Status | Survey Outcome  | Color of End Node Box |Explanation |
+| ------------- | ------------- | ------------ | ------------ |
+| Complete | Responded | Green | Respondent agreed to participate and completed the survey |
+| Complete | Non-responded | Red | Respondent refused to participate or was unable to conduct the survey due to illness, death, wrong number |
+| Incomplete (Call Back) | Pending | Yellow | Respondent did not answer the call or was busy and wanted to reschedule   (NOTE: if enumerators have called 3 times but the respondent never answered the call or kept rescheduling, the survey status will then become “Completed, Non-responded”) |
+
+
+
+
+## Relevant Links
+### SurveyCTO Forms and preload datasets
+1. [Survey XLSForm Template](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/scto/Survey%20Form%20Template%20(without%20module%20completion).xlsx)
+2. [Preload dataset](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/scto/Preloaded%20Data%20Sample.xlsx)
+3. [Deployed SurveyCTO form to test and fill](https://boruis.surveycto.com/collect/demo_survey?caseid=)
+
+### Dashboard Template  
+1. [HFC Dashboard Template (Viewer-mode)](https://docs.google.com/spreadsheets/d/16S2GlDgdeSuzAJEeML8ieDOjKYK7QzfHlrkJE6AwdC4/edit?usp=sharing)
+2. [HFC Dashboard Template (Editor-mode)](https://docs.google.com/spreadsheets/d/1iji2n0nSpS6tE4vOp9EwTb_TdvT-KC2J7wIMqw_q22M/edit?usp=sharing)  

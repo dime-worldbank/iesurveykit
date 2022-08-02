@@ -1,11 +1,10 @@
-
 # Complementary Quality Checks Analysis
 
 In addition to the real time data quality checks published on the dashboard using [the HFC dashboard](), additional checks can be done on statistical software for checks that are difficult to visualize using pivot tables or those which require a deeper dive. These checks include:  
 
 1. <b> Duplicates check </b>: Produce a list for duplicates for complete surveys (same unique ID submitted twice but with different answers - we need to check with field team which one to keep) (see [sample_checks.R](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/r/sample_checks.R))
 2. <b> Advanced survey logs checks </b> Finalize list of incomplete surveys  (sometimes preloads are not updated in a timely fashion, and may indicate that a survey is incomplete when the correct number of attempts (5) have been made and the respondent wasn’t reached OR the survey is actually complete. We need to do a more manual check to remove these cases so that the FC doesn’t go back to the team asking for more submissions) (see [sample_checks.R](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/r/sample_checks.R))
-3. Flag inconsistencies in incomplete surveys (the number of attempts/completion status in the tracker (see [sample_checks.R](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/r/sample_checks.R))
+3. <b> Flag inconsistencies in incomplete surveys </b> (the number of attempts/completion status in the tracker (see [sample_checks.R](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/r/sample_checks.R))
 4. <b> Response Quality Checks</b>: Track all of the variables in the dataset to produce a latex file that allows the team to scroll through summary statistics of all the variables in the dataset. [sample_checks.R](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/r/sample_checks.R))produce a template code that shows how to create
     * summary statistics table
     * bar graph (for categorical variables)
@@ -16,3 +15,9 @@ In addition to the real time data quality checks published on the dashboard usin
   c. Average survey duration per day + per day/per enumerator
   d. Share of ‘other’ per day + per day/per enumerator
   e. Average response to a question per day + per day/per enumerator
+
+## Relevant Links
+
+### Complementary analysis
+1. [Sample checks](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/r/sample_checks.R)
+2. [Sample analysis](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/r/sample_analysis.R)
