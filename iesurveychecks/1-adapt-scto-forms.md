@@ -4,7 +4,7 @@ When [programming a questionnaire for electronic data collection](https://docs.s
 ## Prepare pre-loaded dataset
 
 The preloaded data should include at least the following items:
-[see Preload Sample](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/scto/Preloaded%20Data%20Sample.xlsx)
+[see Preload Sample](https://github.com/dime-worldbank/iesurveykit/blob/main/iesurveychecks/scto/Preloaded%20Data%20Sample.xlsx)
 
   1. Basic survey information such as the household/respondent id and assigned enumerator name.  Household/respondent ID should be unique.
   2. An attempt counter column with pre-assigned values of 0 (0 submissions). This variable, `attempt_counter`, describes the number of previous submissions for each survey.

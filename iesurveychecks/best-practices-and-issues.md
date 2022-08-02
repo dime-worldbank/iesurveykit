@@ -5,7 +5,7 @@ These surveys are designed to pull modules and survey completion dynamically fro
 - Compare the attempt counter note shown in the survey form with the one listed in the Google Sheet to ensure the preloaded data is up-to-date
 - Notes for better data management:
   - When you’re on a mobile network, SurveyCTO doesn’t automatically upload the surveys to the server. It waits until you’re connected to WiFi or requires you to upload the surveys manually. This is why we see lags in survey submission. This can be changed within the application (under General Settings) to allow for automatic upload when any mobile network is available. However, if enumerators are working in areas with little to no internet coverage, this will remain an issue. Ultimate decision - depends on WiFi and/or mobile network availability.
-  <img src="https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/img/image8.png" width="75%"><!--- Image is read from master branch or use full URL-->
+  <img src="https://github.com/dime-worldbank/iesurveykit/blob/main/iesurveychecks/img/image8.png" width="75%"><!--- Image is read from master branch or use full URL-->
 
 - Protocols for updating the server dataset
   - Enumerators should change SurveyCTO settings to auto upload surveys and auto download the new server dataset when connected to a MOBILE network
