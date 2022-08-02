@@ -1,6 +1,6 @@
 # Instructions on Google Sheet functions
 
-The graphs and tables in the HFC template are created mainly using the following functions:  
+The graphs and tables in the [real time data quality checks template](https://github.com/dime-worldbank/iesurveykit/blob/initial-update/iesurveychecks/2-set-up-hfc-dashboard.md) are created mainly using the following functions:  
 1. [PivotTable](https://support.google.com/docs/answer/1272900?co=GENIE.Platform%3DDesktop&hl=en): PivotTable functions are used to create aggregate tables.
    * Select the raw SurveyCTO-exported data and in the menu at the top, click Data > Pivot Table.
    * In the side panel, Rows are your level of aggregation (e.g. use enumerator IDs as Rows if it is enumerator-level tracking), and Values are the calculations you want to show in your columns.
