@@ -71,8 +71,12 @@
 # Excel
 !/**/*.xlsx
 
-# Excel
+# Image
 !/**/*.png
+
+# PDF
+!/**/*.pdf
+
 
 #######################
 # Include some additional file formats in any output folder. You might have
