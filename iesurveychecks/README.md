@@ -29,3 +29,8 @@ A sample of how to program these checks are detailed in [Complementary analysis]
 
 ## Advanced: Including module completion
 Long surveys or surveys dealing with sensitive topics it may be difficult to get respondents to stay for the whole duration in one sitting so this allows submission of partial surveys and can be picked up on a later date / time, even by another enumerator. In such cases, [module completion checks](https://github.com/dime-worldbank/iesurveykit/blob/main/iesurveychecks/4-module-completion-checks.md) help keep track of completion at the module level.  Please note that module completion tracker should be used judiciously as it is useful for very long surveys but is complex to set up with it's own set of challenges.
+
+
+## Relevant links
+
+You can find a downloadable version of the full set of instructions of setting up a real time data quality checks dashboard [here](https://docs.google.com/document/d/1eEsuKnc0vl6428U9D8uYCs8gNptFSG3bdyrmJlpfNvI/edit?usp=sharing)
