@@ -33,4 +33,4 @@ Long surveys or surveys dealing with sensitive topics it may be difficult to get
 
 ## Relevant links
 
-You can find a downloadable version of the full set of instructions of setting up a real time data quality checks dashboard [here](https://docs.google.com/document/d/1eEsuKnc0vl6428U9D8uYCs8gNptFSG3bdyrmJlpfNvI/edit?usp=sharing)
+You can find a downloadable version of the full set of instructions of setting up a real time data quality checks dashboard [here](https://github.com/dime-worldbank/iesurveykit/blob/main/iesurveychecks/instructions-creating-real-time-dashboard.pdf).
